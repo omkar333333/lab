@@ -1,0 +1,40 @@
+# Greedy Search Example using Prim's Algorithm
+
+
+INF = 9999999  # A large number representing infinity
+
+# Number of vertices in the graph
+V = 5
+
+# Graph represented as an adjacency matrix
+G = [
+    [0, 9, 75, 0, 0],
+    [9, 0, 95, 19, 42],
+    [75, 95, 0, 51, 66],
+    [0, 19, 51, 0, 31],
+    [0, 42, 66, 31, 0]
+]
+
+selected = [False] * V
+no_edge = 0
+
+selected[0] = True  # Start from the first vertex
+
+print("Edge : Weight\n")
+
+while no_edge < V - 1:
+    minimum = INF
+    x = 0
+    y = 0
+    for i in range(V):
+        if selected[i]:
+            for j in range(V):
+                if (not selected[j]) and G[i][j]:
+                    # If not selected and there is an edge
+                    if minimum > G[i][j]:
+                        minimum = G[i][j]
+                        x = i
+                        y = j
+    print(f"{x} - {y} : {G[x][y]}")
+    selected[y] = True
+    no_edge += 1
